@@ -1,4 +1,7 @@
-FROM node:latest
+# Pin to a concrete, current Node LTS. The toolchain (Hexo 8) requires
+# Node >= 20.19; an unpinned `node:latest` silently drifts, and the build-env
+# image was last rebuilt in 2020 (Node 15), which Hexo 8 will not run on.
+FROM node:22-bookworm
 
 LABEL "maintainer"="Changkun Ou <hi[at]changkun.de>"
 LABEL "repository"="https://github.com/changkun/modern-cpp-tutorial"
