@@ -1,7 +1,9 @@
+<% var isEn = page.type == 'book-en-us' %>
+
 <div class="sidebar">
   <div class="sidebar-inner-index">
     <ul class="main-menu">
-      <% if (page.type == 'book-en-us') { %>
+      <% if (isEn) { %>
         <%- partial('partials/main_menu_en', { context: 'nav' }) %>
       <% } else {%>
         <%- partial('partials/main_menu', { context: 'nav' }) %>
@@ -11,35 +13,20 @@
 </div>
 
 <div id="lang-switch">
-  <button type="button" class="lang-btn" data-set="zh">
-    <span class="flag" style="content: url(/modern-cpp/assets/lang/cn.svg);"></span>中文
-  </button>
-  <button type="button" class="lang-btn" data-set="en">
-    <span class="flag" style="content: url(/modern-cpp/assets/lang/en.svg);"></span>English
-  </button>
+  <% if (isEn) { %>
+    <a class="lang-btn" href="<%- url_for("/modern-cpp/") %>">
+      <span class="flag" style="content: url(/modern-cpp/assets/lang/cn.svg);"></span>中文
+    </a>
+  <% } else { %>
+    <a class="lang-btn" href="<%- url_for("/modern-cpp/en/") %>">
+      <span class="flag" style="content: url(/modern-cpp/assets/lang/en.svg);"></span>English
+    </a>
+  <% } %>
 </div>
 
-<div id="hero" class="lang" data-lang="zh">
-  <div class="inner">
-    <div class="left">
-      <img class="hero-logo" src="<%- url_for("/modern-cpp/assets/cover-2nd.png") %>">
-    </div><div class="right">
-      <h4>欧长坤 著</h4>
-      <h1>
-        现代 C++ 教程<br>
-      </h1>
-      <h2>高速上手 C++11 到 C++26</h2>
-      <h3>第二版</h3>
-      <p>
-        <a class="button white" href="<%- url_for("/modern-cpp/zh-cn/00-preface/") %>">🇨🇳 在线阅读</a>
-        <a class="button download" href="<%- url_for("/modern-cpp/pdf/modern-cpp-tutorial-zh-cn.pdf") %>">🇨🇳 下载</a>
-      </p>
-    </div>
-  </div>
-</div>
-
-<div id="hero" class="lang" data-lang="en">
-  <div class="inner">
+<% if (isEn) { %>
+  <div id="hero">
+    <div class="inner">
       <div class="left">
         <img class="hero-logo" src="<%- url_for("/modern-cpp/assets/cover-2nd-en.png") %>">
       </div><div class="right">
@@ -54,45 +41,39 @@
           <a class="button download" href="<%- url_for("/modern-cpp/pdf/modern-cpp-tutorial-en-us.pdf") %>">🇬🇧 Download</a>
         </p>
       </div>
+    </div>
   </div>
-</div>
+<% } else { %>
+  <div id="hero">
+    <div class="inner">
+      <div class="left">
+        <img class="hero-logo" src="<%- url_for("/modern-cpp/assets/cover-2nd.png") %>">
+      </div><div class="right">
+        <h4>欧长坤 著</h4>
+        <h1>
+          现代 C++ 教程<br>
+        </h1>
+        <h2>高速上手 C++11 到 C++26</h2>
+        <h3>第二版</h3>
+        <p>
+          <a class="button white" href="<%- url_for("/modern-cpp/zh-cn/00-preface/") %>">🇨🇳 在线阅读</a>
+          <a class="button download" href="<%- url_for("/modern-cpp/pdf/modern-cpp-tutorial-zh-cn.pdf") %>">🇨🇳 下载</a>
+        </p>
+      </div>
+    </div>
+  </div>
+<% } %>
 
 <div id="footer">
-  <p class="lang" data-lang="zh">
-    <a href="https://changkun.de">欧长坤</a> &copy; 2016-<%- new Date().getFullYear() %> 版权所有，
-    采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。</a>
-  </p>
-  <p class="lang" data-lang="en">
-    <a href="https://changkun.de">Changkun Ou</a> &copy; 2016-<%- new Date().getFullYear() %>.
-    The book is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0</a>, code is open sourced under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> License. </a>
-  </p>
+  <% if (isEn) { %>
+    <p>
+      <a href="https://changkun.de">Changkun Ou</a> &copy; 2016-<%- new Date().getFullYear() %>.
+      The book is licensed under <a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">Creative Commons Attribution-NonCommercial-NoDerivatives 4.0</a>, code is open sourced under the <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> License.
+    </p>
+  <% } else { %>
+    <p>
+      <a href="https://changkun.de">欧长坤</a> &copy; 2016-<%- new Date().getFullYear() %> 版权所有，
+      采用<a rel="license" href="https://creativecommons.org/licenses/by-nc-nd/4.0/">知识共享署名-非商业性使用-禁止演绎 4.0 国际许可协议许可</a>，代码使用 <a href="https://opensource.org/licenses/MIT" target="_blank">MIT</a> 协议开源。
+    </p>
+  <% } %>
 </div>
-
-<script>
-(function () {
-  var sections = document.querySelectorAll('.lang');
-  var buttons = document.querySelectorAll('.lang-btn');
-  function apply(lang) {
-    for (var i = 0; i < sections.length; i++) {
-      sections[i].style.display = sections[i].getAttribute('data-lang') === lang ? '' : 'none';
-    }
-    for (var j = 0; j < buttons.length; j++) {
-      var on = buttons[j].getAttribute('data-set') === lang;
-      buttons[j].className = on ? 'lang-btn active' : 'lang-btn';
-    }
-    document.documentElement.lang = lang === 'zh' ? 'zh-CN' : 'en';
-  }
-  var stored = null;
-  try { stored = localStorage.getItem('mcpp-lang'); } catch (e) {}
-  var nav = (navigator.language || navigator.userLanguage || 'en').toLowerCase();
-  var lang = stored || (nav.indexOf('zh') === 0 ? 'zh' : 'en');
-  apply(lang);
-  for (var k = 0; k < buttons.length; k++) {
-    buttons[k].addEventListener('click', function () {
-      var l = this.getAttribute('data-set');
-      try { localStorage.setItem('mcpp-lang', l); } catch (e) {}
-      apply(l);
-    });
-  }
-})();
-</script>

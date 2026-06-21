@@ -5,7 +5,7 @@
 [![](https://img.shields.io/github/actions/workflow/status/changkun/modern-cpp-tutorial/website.yml?branch=master&style=flat-square)](https://github.com/changkun/modern-cpp-tutorial/actions/workflows/website.yml) [![](https://img.shields.io/badge/language-English-blue.svg?style=flat-square)](./README.md) [![](https://img.shields.io/badge/language-简体中文-red.svg?style=flat-square)](./README-zh-cn.md) [![](https://img.shields.io/badge/€-donate-ff69b4.svg?style=flat-square)](./assets/donate.md)
 ## Purpose
 
-The book claims to be "On the Fly". Its intent is to provide a comprehensive introduction to the relevant features regarding modern C++ (before 2020s).
+The book claims to be "On the Fly". Its intent is to provide a comprehensive introduction to the relevant features of modern C++ (from C++11 through C++26).
 Readers can choose interesting content according to the following table of content to learn and quickly familiarize the new features you would like to learn.
 Readers should be aware that not all of these features are required. Instead, it should be learned when you really need it.
 

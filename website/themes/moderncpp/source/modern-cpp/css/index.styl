@@ -22,15 +22,11 @@ body
     .logo
       display: none
 
-// Before JS runs, show only the Chinese sections to avoid a flash of both
-// languages; the toggle script reveals the right one on load.
-.lang[data-lang="en"]
-  display: none
-
 #lang-switch
   text-align: center
   padding: 90px 40px 0 200px
-  button.lang-btn
+  a.lang-btn
+    display: inline-block
     background: transparent
     border: 1px solid rgba(126, 45, 54, 0.4)
     color: $theme
@@ -43,8 +39,6 @@ body
     cursor: pointer
     transition: all .2s ease
     &:hover
-      border-color: $theme
-    &.active
       background: $theme
       color: #fff
       border-color: $theme
