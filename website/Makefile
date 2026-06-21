@@ -12,6 +12,7 @@ all: clean
 	cp -r ../code ./src/modern-cpp/
 	npx hexo generate
 	mv public/index.html public/modern-cpp/index.html
+	rm -rf public/_generated_home_stub
 s: all
 	node_modules/serve/bin/serve.js ./public
 clean:
